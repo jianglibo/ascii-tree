@@ -9,11 +9,11 @@ app
 -helper.js
 -others
 --Brocfile.js
+package.json
 ```
 
 out:
 ```
-package.json
 ├── app
 |   ├── main.js
 |   ├── helper.js
