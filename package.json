@@ -1,5 +1,5 @@
 {
-  "name": "dtree-converter",
+  "name": "ascii-tree",
   "version": "1.0.0",
   "description": "convert indented line block to an ascii directory tree",
   "main": "index.js",
@@ -18,9 +18,9 @@
   "author": "jianglibo <jianglibo@gmail.com> (http://www.m3958.com/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jianglibo/dtree-converter/issues"
+    "url": "https://github.com/jianglibo/ascii-tree/issues"
   },
-  "homepage": "https://github.com/jianglibo/dtree-converter#readme",
+  "homepage": "https://github.com/jianglibo/ascii-tree#readme",
   "devDependencies": {
     "mocha": "^2.3.4"
   }

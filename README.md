@@ -1,4 +1,5 @@
-# dtree-converter
+# Ascii Tree
+
 convert indented line block to an ascii directory tree.
 
 ## usage
