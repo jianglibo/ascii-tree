@@ -1,6 +1,11 @@
 # dtree-converter
 convert indented line block to an ascii directory tree.
 
+## usage
+
+```javascript
+var convertedLines = new DtreeConverter(lines, "-").convert();
+```
 
 in:
 ```
