@@ -2,12 +2,12 @@ var path = require('path');
 var fs = require('fs');
 var assert = require('assert');
 var LineObject = require('../line-object');
-var DtreeConverter = require('../index');
+var AsciiTreeConverter = require('../index');
 
-describe('DtreeConverter', function() {
+describe('AsciiTreeConverter', function() {
   describe('#constructor', function() {
     it('should ok when one line', function() {
-      var lo = new DtreeConverter("hello");
+      var lo = new AsciiTreeConverter("hello");
       var topLine = lo.buildTree();
       var convertedlines = topLine.toLines();
       var childLo = topLine.children[0];
@@ -20,7 +20,7 @@ describe('DtreeConverter', function() {
 
   describe('#buildTree', function() {
     it('should ok', function() {
-      var lo = new DtreeConverter("app\n-main.js\n-helper.js\n-others\n--Brocfile.js\npackage.json ");
+      var lo = new AsciiTreeConverter("app\n-main.js\n-helper.js\n-others\n--Brocfile.js\npackage.json ");
       var topLine = lo.buildTree();
       var convertedlines = topLine.toLines();
       convertedlines.forEach(function(it){

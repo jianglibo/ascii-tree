@@ -5,7 +5,7 @@ convert indented line block to an ascii directory tree.
 ## usage
 
 ```javascript
-var convertedLines = new DtreeConverter(lines, "-").convert();
+var convertedLines = new AsciiTreeFilter(lines, "-").convert();
 ```
 
 in:

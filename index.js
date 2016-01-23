@@ -1,8 +1,8 @@
 var LineObject = require('./line-object');
 
-module.exports = DtreeConverter;
+module.exports = AsciiTreeConverter;
 
-function DtreeConverter(lines, leadingChar) {
+function AsciiTreeConverter(lines, leadingChar) {
   if ((typeof lines) === 'string') {
     this.lines = lines.split("\n");
   } else {
@@ -11,12 +11,12 @@ function DtreeConverter(lines, leadingChar) {
   this.leadingChar = leadingChar || this.guessLeadingChar();
 }
 
-DtreeConverter.prototype.convert = function() {
+AsciiTreeConverter.prototype.convert = function() {
   var topLine = this.buildTree();
   return topLine.toLines();
 };
 
-DtreeConverter.prototype.buildTree = function() {
+AsciiTreeConverter.prototype.buildTree = function() {
   var topLine = new LineObject(),
     leadingChar = this.leadingChar,
     currentLine = topLine;
@@ -31,7 +31,7 @@ DtreeConverter.prototype.buildTree = function() {
   return topLine;
 };
 
-DtreeConverter.prototype.getLineMeta = function(line) {
+AsciiTreeConverter.prototype.getLineMeta = function(line) {
   var level = 0,
     leadingChar = this.leadingChar,
     content;
@@ -50,7 +50,7 @@ DtreeConverter.prototype.getLineMeta = function(line) {
 };
 
 // leading char cannot be alphanumeric
-DtreeConverter.prototype.guessLeadingChar = function() {
+AsciiTreeConverter.prototype.guessLeadingChar = function() {
   var countmap = {},
     leader,
     oneCount,
