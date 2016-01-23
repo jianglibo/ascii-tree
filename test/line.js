@@ -1,13 +1,13 @@
 var path = require('path');
 var fs = require('fs');
 var assert = require('assert');
-var LineObject = require('../line-object');
-var DtreeConverter = require('../index');
+var Line = require('../lib/line');
+var AsciiTree = require('../lib/ascii-tree');
 
-describe('LineOjbect', function() {
+describe('Line', function() {
   describe('#constructor', function() {
     it('should ok', function() {
-      var lo = new LineObject();
+      var lo = new Line();
       assert.equal(-1, lo.level);
       assert.equal("", lo.content);
       assert.deepEqual([], lo.children);
@@ -16,10 +16,10 @@ describe('LineOjbect', function() {
   });
 });
 
-describe('DtreeConverter', function() {
+describe('AsciiTree', function() {
   describe('#constructor', function() {
     it('should ok', function() {
-      var lo = new LineObject();
+      var lo = new Line();
       assert.equal(-1, lo.level);
       assert.equal("", lo.content);
       assert.deepEqual([], lo.children);
