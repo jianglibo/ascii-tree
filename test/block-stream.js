@@ -5,7 +5,6 @@ var assert = require('assert');
 var blockstream = require('../lib/block-stream');
 var splitterStream = require('../lib/splitter-stream');
 var AbstractLine = require('../lib/abstract-line');
-var logmsg = require('./logmsg');
 
 
 var expect = chai.expect;

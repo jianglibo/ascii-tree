@@ -1,45 +1,77 @@
-var path = require('path');
-var fs = require('fs');
 var assert = require('assert');
+var through2 = require('through2');
 var FileFilter = require('../lib/file-filter');
 
+var splitterStream = require('../lib/splitter-stream');
+var blockStream = require('../lib/block-stream');
+var treeStream = require('../lib/tree-stream');
+var fixtures = require('./fixtures');
+
+var startTag = "---start---";
+var endTag = "---end---";
 
 describe('FileFilter', function() {
   describe('#convert()', function() {
-  //   it('should handle string tag string lines', function() {
-  //     var lines = [];
-  //     lines[0] = "---start---";
-  //     lines[1] = "hello";
-  //     lines[2] = "---end---";
-  //     var wfp = new FileFilter(lines, lines[0], lines[2]);
-  //
-  //     var newLines = wfp.convert();
-  //     assert.equal(1, newLines.length);
-  //   });
-  //
-  //   it('should handle string tag buffer lines', function() {
-  //     var lines = [];
-  //     lines[0] = new Buffer("---start---");
-  //     lines[1] = new Buffer("hello");
-  //     lines[2] = new Buffer("---end---");
-  //     var wfp = new FileFilter(lines, "---start---", "---end---");
-  //
-  //     var newLines = wfp.convert();
-  //     assert.equal(1, newLines.length);
-  //   });
-  //
-  //   it('should handle regex tag buffer lines', function() {
-  //     var lines = [];
-  //     lines[0] = new Buffer("{% asciitree %}");
-  //     lines[1] = new Buffer("hello");
-  //     lines[2] = new Buffer("{% endasciitree %}");
-  //     var wfp = new FileFilter(lines, /^{%\s+asciitree\s+%}$/, /^{%\s+endasciitree\s+%}$/, "<pre>", "</pre>");
-  //
-  //     var newLines = wfp.convert();
-  //     assert.equal(3, newLines.length);
-  //     assert.equal("<pre>", newLines[0]);
-  //     assert(Buffer.isBuffer(newLines[0]), "should return buffer");
-  //     assert.equal("</pre>", newLines[2]);
-  //   });
+    it('block-stream should work.', function(done) {
+      var count = 0;
+      var blocks = [];
+      var src = through2.obj(function(buf, enc, cb) {
+        cb(null, buf);
+      });
+
+      src.pipe(splitterStream())
+        .pipe(blockStream(startTag, endTag))
+        .pipe(through2.obj(function(block, enc, cb) {
+          count++;
+          blocks.push(block);
+          cb();
+        })).on('finish', function() {
+          // blocks[0].lines.forEach(function(it){
+          //   console.log(it);
+          // });
+          assert.equal(1, count);
+          assert.equal(fixtures.stringArray.length, blocks[0].lines.length);
+
+          done();
+        });
+
+      src.write(startTag);
+      src.write('\r');
+      fixtures.stringArray.forEach(function(it){
+        src.write(it);
+        src.write('\r');
+      });
+      src.write(endTag);
+      src.write('\r\r\r');
+      src.end();
+    });
+
+    it('should handle stream input.', function(done) {
+      var count = 0;
+
+      var src = through2.obj(function(buf, enc, cb) {
+        cb(null, buf);
+      });
+
+      src.pipe(splitterStream())
+        .pipe(blockStream(startTag, endTag))
+        .pipe(treeStream())
+        .pipe(through2.obj(function(line, enc, cb) {
+          count++;
+          cb();
+        })).on('finish', function() {
+          assert.equal(fixtures.stringArray.length, count);
+          done();
+        });
+
+      src.write(startTag);
+      src.write('\r');
+      fixtures.stringArray.forEach(function(it) {
+        src.write(it);
+        src.write('\r');
+      });
+      src.write(endTag);
+      src.end();
+    });
   });
 });
