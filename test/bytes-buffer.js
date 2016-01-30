@@ -6,7 +6,7 @@ var expect = chai.expect;
 
 var noneAscii = "我的心是旷野的鸟，在你的眼里找到了飞翔的天空。";
 
-describe('bytes and buffer', function() {
+describe('Bytes and Buffer', function() {
   it("ascii's bytes and buffer should equal.", function() {
     var buf = new Buffer("abc");
     var i = 0;
@@ -14,7 +14,7 @@ describe('bytes and buffer', function() {
 
     for (i = 0; i < buf.length; i++) {
       bytes.push(buf[i]);
-    };
+    }
 
     for (i = 0; i < bytes.length; i++) {
       assert.equal(bytes[i], buf[i]);
@@ -28,7 +28,7 @@ describe('bytes and buffer', function() {
 
     for (i = 0; i < buf.length; i++) {
       bytes.push(buf[i]);
-    };
+    }
     for (i = 0; i < bytes.length; i++) {
       assert.equal(bytes[i], buf[i]);
     }
@@ -42,7 +42,7 @@ describe('bytes and buffer', function() {
     assert(noneAscii.length !== buf.length);
     for (i = 0; i < noneAscii.length; i++) {
       bytes.push(noneAscii.charCodeAt(i));
-    };
+    }
     assert(bytes.length === noneAscii.length);
   });
 
@@ -54,13 +54,13 @@ describe('bytes and buffer', function() {
     var str = fs.readFileSync("fixtures/gbk.txt", {encoding: "utf-8"});
     assert(typeof str === 'string');
 
-    for(i=0;i<str.length;i++) {
-      console.log(str.charCodeAt(i));
-    }
+    // for(i=0;i<str.length;i++) {
+    //   console.log(str.charCodeAt(i));
+    // }
 
     str = fs.readFileSync("fixtures/afile.txt", {encoding: "utf-8"});
     assert(typeof str === 'string');
-    
-    console.log(str);
+
+    // console.log(str);
   });
 });

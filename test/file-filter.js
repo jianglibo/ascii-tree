@@ -26,9 +26,6 @@ describe('FileFilter', function() {
           blocks.push(block);
           cb();
         })).on('finish', function() {
-          // blocks[0].lines.forEach(function(it){
-          //   console.log(it);
-          // });
           assert.equal(1, count);
           assert.equal(fixtures.stringArray.length, blocks[0].lines.length);
 

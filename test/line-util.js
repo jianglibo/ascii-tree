@@ -7,17 +7,7 @@ var BytesLine = require('../lib/bytes-line');
 describe('LineUtil', function() {
   describe('#guessLeadingCharCode()', function() {
     it('should handle raw string lines.', function() {
-      var leadingCharCode = LineUtil.guessLeadingCharCode(["app", "-abc.js"]);
-      assert.equal("-".charCodeAt(0), leadingCharCode);
-    });
-
-    it('should handle string lines.', function() {
-      var leadingCharCode = LineUtil.guessLeadingCharCode(LineUtil.stringLines(["app", "-abc.js"]));
-      assert.equal("-".charCodeAt(0), leadingCharCode);
-    });
-
-    it('should handle buffer lines.', function() {
-      var leadingCharCode = LineUtil.guessLeadingCharCode(LineUtil.bufferLines(["app","-abc.js"]));
+      var leadingCharCode = LineUtil.guessLeadingCharCode(BytesLine.getArray("app\r-abc.js"));
       assert.equal("-".charCodeAt(0), leadingCharCode);
     });
   });
