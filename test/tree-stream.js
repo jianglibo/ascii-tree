@@ -9,11 +9,6 @@ var AbstractLine = require('../lib/abstract-line');
 
 
 var expect = chai.expect;
-/**
-because stream catch all errors, include assertion errors.
-So I just pinrt it.
-*/
-
 
 describe('TreeStream', function() {
   describe('#pipe()', function() {

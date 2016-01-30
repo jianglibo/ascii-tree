@@ -1,6 +1,6 @@
 var assert = require('assert');
 var through2 = require('through2');
-var FileFilter = require('../lib/file-filter');
+var FileFilter = require('../lib/buffer-filter');
 
 var splitterStream = require('../lib/splitter-stream');
 var blockStream = require('../lib/block-stream');
@@ -27,7 +27,7 @@ describe('FileFilter', function() {
           cb();
         })).on('finish', function() {
           assert.equal(1, count);
-          assert.equal(fixtures.stringArray.length, blocks[0].lines.length);
+          assert.equal(fixtures.stringArray.length, blocks[0].length);
 
           done();
         });
