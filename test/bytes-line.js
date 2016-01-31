@@ -24,13 +24,13 @@ describe('BytesLine', function() {
 
   describe('#getArray()', function() {
     it("should handle string.", function() {
-      var lines = BytesLine.getArray("a\rb\rc\r\r\r");
+      var lines = BytesLine.getArray("a\rbbbbbbbb\rc\r\r\r");
       assert.equal(3, lines.length);
       assert.equal('a'.charCodeAt(0), lines[0].content[0]);
       assert.deepEqual([0x0D, 0x0D, 0x0D], lines[2].separator);
     });
     it("should handle buffer.", function() {
-      var lines = BytesLine.getArray(new Buffer("a\rb\rc\r\r\r"));
+      var lines = BytesLine.getArray(new Buffer("a\rb\rcccccccccccccc\r\r\r"));
       assert.equal(3, lines.length);
       assert.equal('a'.charCodeAt(0), lines[0].content[0]);
       assert.deepEqual([0x0D, 0x0D, 0x0D], lines[2].separator);
