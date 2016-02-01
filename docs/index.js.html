@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: asciitree-builder.js</title>
+    <title>JSDoc: Source: index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: asciitree-builder.js</h1>
+    <h1 class="page-title">Source: index.js</h1>
 
     
 
@@ -26,57 +26,37 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>var BytesLine = require('./bytes-line');
+            <pre class="prettyprint source linenums"><code>/**
+ * exports:
+ * &lt;pre>
+ * module.exports.TreeLine = TreeLine;
+ * module.exports.AsciiTree = AsciiTree;
+ * module.exports.Convertor = Convertor;
+ * module.exports.LineUtil = LineUtil;
+ * module.exports.BytesLine = BytesLine;
+ * module.exports.AsciiTreeBuilder = AsciiTreeBuilder;
+ * module.exports.ConvertorBuilder = ConvertorBuilder;
+ * module.exports.Char = Char;
+ * &lt;/pre>
+ * @module
+ */
+var TreeLine = require('./tree-line');
 var AsciiTree = require('./ascii-tree');
+var AsciiTreeBuilder = require('./asciitree-builder');
+var ConvertorBuilder = require('./convertor-builder');
+var Convertor = require('./convertor');
+var LineUtil = require('./line-util');
+var BytesLine = require('./bytes-line');
+var Char = require('./char');
 
-module.exports = AsciiTreeBuilder;
-
-/**
- * A helper class to create AsciiTree.
- * @constructor
- */
-function AsciiTreeBuilder() {
-  this.content = null;
-}
-
-/**
- * @function withContent
- * @memberof AsciiTreeBuilder
- * @instance
- * @param {string|Buffer} content
- * @param {string} enc - string encoding.
- * @return {AsciiTreeBuilder} - return this instance.
- */
-AsciiTreeBuilder.prototype.withContent = function(content, enc) {
-  this.content = content;
-  this.enc = enc;
-  return this;
-};
-
-/**
- * @function
- * @memberof AsciiTreeBuilder
- * @instance
- * @param {string} enc - encoding.
- * @return {AsciiTreeBuilder} - return this instance.
- */
-
-AsciiTreeBuilder.prototype.withEncode = function(enc) {
-  this.enc = enc;
-  return this;
-};
-
-/**
- * create an AsciiTree instance.
- * @function
- * @instance
- * @memberof AsciiTreeBuilder
- * @return {AsciiTree} - created AsciiTree instance.
- */
-AsciiTreeBuilder.prototype.build = function() {
-  bytesLines = BytesLine.getArray(this.content, this.enc);
-  return new AsciiTree(bytesLines, null, this.enc);
-};
+module.exports.TreeLine = TreeLine;
+module.exports.AsciiTree = AsciiTree;
+module.exports.Convertor = Convertor;
+module.exports.LineUtil = LineUtil;
+module.exports.BytesLine = BytesLine;
+module.exports.AsciiTreeBuilder = AsciiTreeBuilder;
+module.exports.ConvertorBuilder = ConvertorBuilder;
+module.exports.Char = Char;
 </code></pre>
         </article>
     </section>
