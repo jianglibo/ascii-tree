@@ -9,7 +9,7 @@ convert one tree.
   var tree = new AsciiTree(BytesLine.getArray("hello")).convert();
   assert.equal("└── hello", tree.toString());
   // or use builder helper.
-  var tree = new AsciiTreeBuilder().withString("hello").withEncode("UTF-8").build().convert();
+  var tree = new AsciiTreeBuilder().withContent("hello").withEncode("UTF-8").build().convert();
   assert.equal("└── hello", tree.toString());
 
   tree.toBufferArray();

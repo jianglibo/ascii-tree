@@ -9,7 +9,7 @@
   var tree = new AsciiTree(BytesLine.getArray("hello")).convert();
   assert.equal("└── hello", tree.toString());
   // or use builder helper.
-  var tree = new AsciiTreeBuilder().withString("hello").withEncode("UTF-8").build().convert();
+  var tree = new AsciiTreeBuilder().withContent("hello").withEncode("UTF-8").build().convert();
   assert.equal("└── hello", tree.toString());
 
   tree.toBufferArray();
@@ -90,7 +90,7 @@ out:
     .pipe(treeStream()) // 将单一行直接传递下去，将树块转换之后传递
     .pipe(unwrapStream()) // 扁平化成Buffer
     .pipe(dst);
-    
+
   //or define a function
   function treepipe(src) {
    return src.pipe(splitterStream()) //to BytesLine
