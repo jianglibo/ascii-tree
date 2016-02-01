@@ -1,10 +1,10 @@
 # Ascii Tree
 
-convert indented line block to an ascii directory tree.[中文](README_ZH.md)
+将锯齿状的行块转换成一个Ascii树。 [English](README.md)
 
-## sync
+## 同步版本
 
-convert one tree.
+转换一棵树，不包含树的分隔行。换行符在转换过程中保持不变。
 ```javascript
   var tree = new AsciiTree(BytesLine.getArray("hello")).convert();
   assert.equal("└── hello", tree.toString());
@@ -16,8 +16,7 @@ convert one tree.
   tree.toStringArray();
   tree.toString();
 ```
-
-convert mutilple blocks in a file. block is surround by startTag and endTag, which can be a string or a regex. prepend will be the first line of block result, append will be last line or result.
+将文本中的所有树作转换，树行块通过分割行定义开始和结束。比如下面的文本块。
 
 ```
 {% asciitree %}
@@ -31,9 +30,10 @@ package.json
 ```
 
 ```javascript
+  //识别分割行的可以是字符串或正则表达式，字符的话是trim首尾之后的相等。
   var convertor = new Convertor(string, /^{%\s+asciitree\s+%}$/, "{% endasciitree %}", '<pre>', '</pre>').convert();
-  //or use builder helper.
 
+  //or use builder helper.
   var convertorBuilder = new ConvertorBuilder()
     .withContent(string)
     .withStartTag("{% asciitree %}")
@@ -80,17 +80,17 @@ out:
 └── package.json
 ```
 
-## stream
+## 流版本
 
 ```javascript
   var src = fs.createReadStream('fixtures/tagfile.txt');
   var dst = fs.createWriteStream('file.txt');
-  src.pipe(splitterStream()) //to BytesLine
-    .pipe(blockStream("{% asciitree %}", "{% endasciitree %}")) //produce one line or block of lines.
-    .pipe(treeStream()) // bypass oneline, process block of lines.
-    .pipe(unwrapStream()) // flatten block lines to Buffer.
+  src.pipe(splitterStream()) //将输入流变成BytesLine输出流
+    .pipe(blockStream("{% asciitree %}", "{% endasciitree %}")) //产生单一的行（不在树中间的话），行块（对应一棵树）
+    .pipe(treeStream()) // 将单一行直接传递下去，将树块转换之后传递
+    .pipe(unwrapStream()) // 扁平化成Buffer
     .pipe(dst);
-
+    
   //or define a function
   function treepipe(src) {
    return src.pipe(splitterStream()) //to BytesLine

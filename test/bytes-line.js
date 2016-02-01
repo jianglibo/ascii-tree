@@ -5,6 +5,13 @@ var BytesLine = require('../lib/bytes-line');
 var expect = chai.expect;
 
 describe('BytesLine', function() {
+  describe('#constructor()', function() {
+    it("should handle buffer.", function() {
+      var bl = new BytesLine(new Buffer([]), []);
+      assert(bl.isEmpty(), "should be empty.");
+    });
+  });
+  
   describe('#isEmpty()', function() {
     it("should be empty.", function() {
       var bl = new BytesLine([], []);
