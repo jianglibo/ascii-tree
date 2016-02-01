@@ -2,6 +2,8 @@
 
 将锯齿状的行块转换成一个Ascii树。 [English](README.md)
 
+[API文档](https://jianglibo.github.com/ascii-tree/docs)
+
 ## 同步版本
 
 转换一棵树，不包含树的分隔行。换行符在转换过程中保持不变。
