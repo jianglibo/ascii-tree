@@ -7,6 +7,12 @@ var expect = chai.expect;
 var noneAscii = "我的心是旷野的鸟，在你的眼里找到了飞翔的天空。";
 
 describe('Bytes and Buffer', function() {
+  it("encoding.", function() {
+    assert(!Buffer.isEncoding('buffer'), "buffer is not encoding.");
+    assert(!Buffer.isEncoding(undefined), "undefined is not encoding.");
+    assert(!Buffer.isEncoding(null), "null is not encoding.");
+    assert(Buffer.isEncoding('ascii'), "ascii is encoding.");
+  });
   it("ascii's bytes and buffer should equal.", function() {
     var buf = new Buffer("abc");
     var i = 0;
