@@ -1,6 +1,6 @@
 {
   "name": "my-ascii-tree",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "convert indented line block to an ascii directory tree",
   "main": "lib/index.js",
   "scripts": {

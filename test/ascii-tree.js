@@ -89,11 +89,23 @@ describe('AsciiTree', function() {
 
       var strs = tree.toStringArray();
       assert.equal(4, strs.length);
-      
+
       assert.deepEqual([0x0D], lines[0].separator, "line 1");
       assert.deepEqual([], lines[1].separator, "line 2");
       assert.deepEqual([0x0D], prepends[0].separator, "line 3");
       assert.deepEqual([0x0D], prepends[1].separator, "line 4");
+
+      tree = new AsciiTree(BytesLine.getArray("abc\rhello")).prepend("a").append("b").convert();
+      prepends = tree.prepends;
+      lines = tree.lines;
+
+      strs = tree.toStringArray();
+      assert.equal(4, strs.length);
+
+      assert.deepEqual([0x0D], lines[0].separator, "line 1");
+      assert.deepEqual([0x0D], lines[1].separator, "line 2");
+      assert.deepEqual([0x0D], prepends[0].separator, "line 3");
+
     });
   });
 });
