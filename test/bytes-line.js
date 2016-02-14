@@ -11,7 +11,7 @@ describe('BytesLine', function() {
       assert(bl.isEmpty(), "should be empty.");
     });
   });
-  
+
   describe('#isEmpty()', function() {
     it("should be empty.", function() {
       var bl = new BytesLine([], []);
@@ -26,6 +26,14 @@ describe('BytesLine', function() {
 
       bf = new BytesLine([0x0D, 0x0A], [0x0D]).toBuffer();
       assert.deepEqual(new Buffer([0x0D, 0x0A, 0x0D]), bf);
+    });
+  });
+
+  describe('#fromString()', function() {
+    it("should work.", function() {
+      var str = "hello bytesline.";
+      var bl = BytesLine.fromString(str, [0x0D, 0x0A]);
+      assert.deepEqual([0x0D, 0x0A],bl.separator);
     });
   });
 
