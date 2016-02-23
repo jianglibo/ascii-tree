@@ -1,3 +1,7 @@
+## 1.0.15
+
+* strict startTag endTag tests.
+
 ## 1.0.13
 
 ### fix
