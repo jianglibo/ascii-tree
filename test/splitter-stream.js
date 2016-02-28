@@ -5,8 +5,17 @@ var assert = require('assert');
 var splitterStream = require('../lib/splitter-stream');
 var BytesLine = require('../lib/bytes-line');
 var fixtures = require('./fixtures');
+var os = require('os');
 
 var expect = chai.expect;
+
+function getCrlf() {
+  var crlf = [];
+  for (var i = 0; i < os.EOL.length; i++) {
+    crlf.push(os.EOL.charCodeAt(i));
+  }
+  return crlf;
+}
 /**
 because stream catch all errors, include assertion errors.
 So I just pinrt it.
@@ -56,7 +65,7 @@ describe('splitterStream', function() {
         .on('finish', function() {
           assert.equal(1, count);
           assert(BytesLine.isBytesLine(lines[0]), 'should be BytesLine');
-          assert.deepEqual([0x0D, 0x0A], lines[0].separator);
+          assert.deepEqual(getCrlf(), lines[0].separator, "");
           done();
         });
     });
@@ -73,7 +82,7 @@ describe('splitterStream', function() {
         }))
         .on('finish', function() {
           assert.equal(1, lines.length);
-          assert.deepEqual([0x0D, 0x0A], lines[0].separator);
+          assert.deepEqual(getCrlf(), lines[0].separator);
           done();
         });
     });
