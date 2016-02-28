@@ -1,5 +1,7 @@
 # Ascii Tree
 
+[![Build Status](https://travis-ci.org/jianglibo/ascii-tree.svg?branch=master)](https://travis-ci.org/jianglibo/ascii-tree)
+
 convert indented line block to an ascii directory tree.[中文](README_ZH.md)
 
 [API](https://jianglibo.github.com/ascii-tree/docs)

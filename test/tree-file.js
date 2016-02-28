@@ -10,10 +10,14 @@ var AbstractLine = require('../lib/abstract-line');
 
 var expect = chai.expect;
 var fn = "whole.txt";
+var fo = "fixtures-out";
 
 describe('TreeStream', function() {
   describe('#pipe()', function() {
     it('should handle tag file.', function(done) {
+      if (!fs.existsSync(fo)) {
+        fs.mkdirSync(fo);
+      }
       var rs = fs.createReadStream('fixtures/' + fn)
         .pipe(splitterStream())
         .pipe(blockStream("*", "**"))
@@ -21,7 +25,7 @@ describe('TreeStream', function() {
         .pipe(through.obj(function(line, enc, cb) {
           cb(null, line.toBuffer());
         }))
-        .pipe(fs.createWriteStream('fixtures-out/' + fn))
+        .pipe(fs.createWriteStream(fo + '/' + fn))
         .on('finish', function() {
           // values1.forEach(function(it) {
           //   assert(it instanceof AbstractLine, "should be an AbstractLine.");
